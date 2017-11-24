@@ -6,6 +6,7 @@ TEST_CASE("insert_root", "[root]") {
    SplayTree<int> testSplayTree;
    testSplayTree.insert(10);
    REQUIRE(testSplayTree.search(10) == 1);
+   REQUIRE(testSplayTree.getCount() == 1);
 }
 
 /* 
@@ -22,6 +23,7 @@ TEST_CASE("Insert left child", "[ilch]") {
    testSplayTree.insert(7);
    REQUIRE(testSplayTree.search(10) == 1);
    REQUIRE(testSplayTree.search(7) == 1);
+   REQUIRE(testSplayTree.getCount() == 2);
    REQUIRE(testSplayTree.getKey(testSplayTree.getRoot()) == 7 );
 }
 
@@ -39,5 +41,6 @@ TEST_CASE("Insert right child", "[irch]") {
    testSplayTree.insert(15);
    REQUIRE(testSplayTree.search(10) == 1);
    REQUIRE(testSplayTree.search(15) == 1);
+   REQUIRE(testSplayTree.getCount() == 2);
    REQUIRE(testSplayTree.getKey(testSplayTree.getRoot()) == 15 );
 }

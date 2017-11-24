@@ -13,7 +13,7 @@ private:
 		T key;
 		Node(const T& value = T()) : left(nullptr), right(nullptr), parent(nullptr), key(value) {}
 	} *root;
-	
+	std::size_t count; 
 	
 	void _transplant(Node *localParent, Node *localChild)
 	{
@@ -116,7 +116,7 @@ private:
 
 	
 public:
-		SplayTree() : root(nullptr) {	};
+		SplayTree() : root(nullptr), count(0) {	 };
 		 ~SplayTree()
 		{
 			delete root;
@@ -133,6 +133,7 @@ public:
 				}
 		}
 		
+
 
 		void insert(const T& value)
 		{
@@ -160,7 +161,7 @@ public:
 				preInsertPlace->right = insertElement;
 			else if (insertElement->key < preInsertPlace->key)
 				preInsertPlace->left = insertElement;
-		
+			++count;
 			_splay(insertElement);
 		}
 
@@ -169,7 +170,7 @@ public:
 		{
 			Node *removeElement = _search(value);
 			//std::cout << removeElement->left;
-			if (removeElement != nullptr)
+			if (removeElement != nullptr && count > 0)
 			{
 				if (removeElement->right == nullptr)
 				{
@@ -198,6 +199,7 @@ public:
 					_splay(newLocalRoot);
 				}
 				delete[] removeElement;
+				--count;
 			}
 		}
 
@@ -215,6 +217,10 @@ public:
 		T getKey(Node *node)
 		{
 			return node->key;
+		}
+		std::size_t getCount()
+		{
+			return count;
 		}
 
 };
