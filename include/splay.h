@@ -212,6 +212,11 @@ public:
 			return root;
 		}
 
+		T getKey(Node *node)
+		{
+			return node->key;
+		}
+
 };
 
 
