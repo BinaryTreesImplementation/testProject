@@ -62,8 +62,8 @@ TEST_CASE("Inserting right child with left brother", "[ilch]") {
    testSplayTree.insert(15);
    testSplayTree.insert(20);      
    REQUIRE(testSplayTree.search(10) == 1);
-   REQUIRE(testSplayTree.search(7) == 1);      
-   REQUIRE(testSplayTree.search(7) == 1);
+   REQUIRE(testSplayTree.search(15) == 1);      
+   REQUIRE(testSplayTree.search(20) == 1);
    REQUIRE(testSplayTree.getCount() == 3);
    REQUIRE(testSplayTree.getKey(testSplayTree.getRoot()) == 20 );
 }
@@ -85,8 +85,8 @@ TEST_CASE("Inserting right child with right parent", "[ilch]") {
    testSplayTree.insert(10);
    testSplayTree.insert(20);      
    REQUIRE(testSplayTree.search(10) == 1);
-   REQUIRE(testSplayTree.search(7) == 1);      
-   REQUIRE(testSplayTree.search(7) == 1);
+   REQUIRE(testSplayTree.search(15) == 1);      
+   REQUIRE(testSplayTree.search(20) == 1);
    REQUIRE(testSplayTree.getCount() == 3);
    REQUIRE(testSplayTree.getKey(testSplayTree.getRoot()) == 20 );
 }
