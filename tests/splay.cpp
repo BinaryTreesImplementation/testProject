@@ -12,7 +12,7 @@ TEST_CASE("insert_root", "[root]") {
 /* 
 Insert left child
 
-		10   		7
+	   10   		7
 	   /	  ->  	 \
 	  7				  10
 */
