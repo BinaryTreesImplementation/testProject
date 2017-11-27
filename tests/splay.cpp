@@ -12,9 +12,9 @@ TEST_CASE("insert_root", "[root]") {
 /* 
 Insert left child
 
-	   10   		7
+	   10   	7
 	   /	  ->  	 \
-	  7				  10
+	  7		  10
 */
 
 TEST_CASE("Inserting left child", "[ilch]") {
@@ -30,9 +30,9 @@ TEST_CASE("Inserting left child", "[ilch]") {
 /* 
 Insert right child
 
-		10   		  15
+		10   	      15
 	   	  \    ->    / 
-	  	   15		10
+	  	   15	   10
 */
 
 TEST_CASE("Inserting right child", "[irch]") {
@@ -49,11 +49,11 @@ TEST_CASE("Inserting right child", "[irch]") {
 /* 
 Inserting right child with left brother
 
-	10	  	     15   		  15		     20
-	  \   ->    /     ->     /  \    ->     /
-	   15 	  10		   10    20		   15
-	   									  /	
-	  		  	 						 10
+	10	     15           15		  20
+	  \   ->    /     ->     /  \    ->      /
+	   15 	  10	       10    20	       15
+	   				      /	
+	                                    10
 */
 
 TEST_CASE("Inserting right child with left brother", "[ilch]") {
@@ -71,11 +71,11 @@ TEST_CASE("Inserting right child with left brother", "[ilch]") {
 /* 
 Inserting left child with right brother
 
-	15	  	  10   		  	10	              20
-	/   ->      \    ->       \       ->     /
-  10    	  	 15		       15		    15
-	   							 \ 		   /	
-	  		  	 				  20	  10
+	15	   10           10	               20
+	/   ->      \    ->       \       ->          /
+      10    	    15		  15		    15
+	   			    \ 		   /	
+	  		  	     20	         10
 */
 
 
