@@ -91,4 +91,25 @@ TEST_CASE("Inserting right child with right parent", "[ilch]") {
    REQUIRE(testSplayTree.getKey(testSplayTree.getRoot()) == 20 );
 }
 
+/* 
+Inserting left child with left brother
 
+	10	      15             15	         5
+	  \    ->    /     ->       /     ->      \
+           15	   10		  10		   10
+	   			 / 		    \
+	  		  	5	             15
+*/
+
+
+TEST_CASE("Inserting left child with left parent", "[ilch]") {
+   SplayTree<int> testSplayTree;
+   testSplayTree.insert(10);
+   testSplayTree.insert(15);
+   testSplayTree.insert(5);      
+   REQUIRE(testSplayTree.search(10) == 1);
+   REQUIRE(testSplayTree.search(15) == 1);      
+   REQUIRE(testSplayTree.search(20) == 1);
+   REQUIRE(testSplayTree.getCount() == 3);
+   REQUIRE(testSplayTree.getKey(testSplayTree.getRoot()) == 5);
+}
