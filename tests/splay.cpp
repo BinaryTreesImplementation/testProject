@@ -278,7 +278,7 @@ TEST_CASE("remove left child with right and left child", "[rrrch]") {
    testSplayTree.insert(16);
    testSplayTree.insert(13);
    testSplayTree.insert(17);
-   testSplayTree.remove(21);     
+   testSplayTree.remove(13);     
    REQUIRE(testSplayTree.getCount() == 4);
    REQUIRE(*testSplayTree.getKeyRoot() == 12);
    REQUIRE(testSplayTree.getLeftKey(12) == nullptr);
