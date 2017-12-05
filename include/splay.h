@@ -13,11 +13,11 @@ private:
 		T key;
 		Node(const T& value = T()) : left(nullptr), right(nullptr), parent(nullptr), key(value) {}
 	} *root;
-	std::size_t count; 
-	
+	std::size_t count;
+
 	void _transplant(Node *localParent, Node *localChild)
 	{
-		if (localParent->parent == nullptr)
+		if (localParent == root)
 			root = localChild;
 		else if (localParent == localParent->parent->left)
 			localParent->parent->left = localChild;
@@ -49,7 +49,10 @@ private:
 			_left->right->parent = localRoot;
 		_transplant(localRoot, _left);
 		_left->right = localRoot;
-		_left->right->parent = _left;
+			
+	
+		//std::cout << *getKeyRoot() << "\n";
+		localRoot->parent = _left;
 	}
 
 	Node *_search(const T& value)
@@ -63,7 +66,6 @@ private:
 				searchedElement = searchedElement->left;
 			else if (searchedElement->key == value)
 			{
-				_splay(searchedElement);
 				return searchedElement;
 			}
 		}
@@ -73,17 +75,17 @@ private:
 	void _splay(Node *pivot)
 	{
 		while (pivot != root)
-		{
-			if (pivot->parent == root) 
+		{      
+			if (pivot->parent == root)
 			{
 
 				if (pivot == pivot->parent->left)
 					_rightRotate(pivot->parent);
-				else if (pivot == pivot->parent->right) 
-				
+				else if (pivot == pivot->parent->right)
+
 					_leftRotate(pivot->parent);
 			}
-			else 
+			else
 			{
 				// Zig-Zig step.
 				if (pivot == pivot->parent->left && pivot->parent == pivot->parent->parent->left)
@@ -93,7 +95,7 @@ private:
 					_rightRotate(pivot->parent);
 
 				}
-				else if (pivot == pivot->parent->right && pivot->parent == pivot->parent->parent->right) 
+				else if (pivot == pivot->parent->right && pivot->parent == pivot->parent->parent->right)
 				{
 					_leftRotate(pivot->parent->parent);
 					_leftRotate(pivot->parent);
@@ -112,117 +114,160 @@ private:
 			}
 		}
 	}
-	
 
-	
+
+
 public:
-		SplayTree() : root(nullptr), count(0) {	 };
-		 ~SplayTree()
+	SplayTree() : root(nullptr), count(0) {	 };
+	~SplayTree()
+	{
+		delete root;
+	}
+	void display(const Node* temp, unsigned int level)const
+	{
+		if (temp)
 		{
-			delete root;
+			display(temp->left, level + 1);
+			for (int i = 0; i < level; i++)
+				std::cout << "__";
+			std::cout << temp->key << "\n";
+			display(temp->right, level + 1);
 		}
-		void display(const Node* temp, unsigned int level)const
+	}
+
+
+
+	void insert(const T& value)
+	{
+		Node *preInsertPlace = nullptr;
+		Node *insertPlace = root;
+
+		while (insertPlace != nullptr)
 		{
-				if (temp)
-				{
-					display(temp->left, level + 1);
-					for (int i = 0; i < level; i++)
-						std::cout << "__";
-					std::cout << temp->key << "\n";
-					display(temp->right, level + 1);
-				}
-		}
-		
+			preInsertPlace = insertPlace;
 
-
-		void insert(const T& value)
-		{
-			Node *preInsertPlace = nullptr;
-			Node *insertPlace = root;
-			
-			while (insertPlace != nullptr)
-			{
-				preInsertPlace = insertPlace;
-
-				if (insertPlace->key < value)
-					insertPlace = insertPlace->right;
-				else if (value < insertPlace->key) {
-					insertPlace = insertPlace->left;
-				}
-			}
-
-			Node *insertElement = new Node(value);
-			insertElement->parent = preInsertPlace;
-
-
-			if (preInsertPlace == nullptr)
-				root = insertElement;
-			else if (preInsertPlace->key < insertElement->key)
-				preInsertPlace->right = insertElement;
-			else if (insertElement->key < preInsertPlace->key)
-				preInsertPlace->left = insertElement;
-			++count;
-			_splay(insertElement);
-		}
-
-			
-		void remove(const T& value)
-		{
-			Node *removeElement = _search(value);
-			//std::cout << removeElement->left;
-			if (removeElement != nullptr && count > 0)
-			{
-				if (removeElement->right == nullptr)
-				{
-					_transplant(removeElement, removeElement->left);
-				}
-				else if (removeElement->left == nullptr)
-				{
-					_transplant(removeElement, removeElement->right);
-				}
-				else
-				{
-					Node *newLocalRoot = removeElement->right;
-					while (newLocalRoot->left != nullptr)
-					{
-						newLocalRoot = newLocalRoot->left;
-					}
-					if (newLocalRoot->parent != removeElement)
-					{
-						_transplant(newLocalRoot, newLocalRoot->right);
-						newLocalRoot->right = removeElement->right;
-						newLocalRoot->right->parent = newLocalRoot;
-					}
-					_transplant(removeElement, newLocalRoot);
-					newLocalRoot->left = removeElement->left;
-					newLocalRoot->left->parent = newLocalRoot;
-					_splay(newLocalRoot);
-				}
-				delete[] removeElement;
-				--count;
+			if (insertPlace->key < value)
+				insertPlace = insertPlace->right;
+			else if (value < insertPlace->key) {
+				insertPlace = insertPlace->left;
 			}
 		}
 
+		Node *insertElement = new Node(value);
+		insertElement->parent = preInsertPlace;
 		
-		bool search(T const& value)
-		{
-			return _search(value);
-		}
 
-		Node *getRoot()
-		{
-			return root;
-		}
+		if (preInsertPlace == nullptr)
+			root = insertElement;
+		else if (preInsertPlace->key < insertElement->key)
+			preInsertPlace->right = insertElement;
+		else if (insertElement->key < preInsertPlace->key)
+			preInsertPlace->left = insertElement;
+		++count;
+		_splay(insertElement);
+	}
 
-		T getKey(Node *node)
-		{
-			return node->key;
-		}
-		std::size_t getCount()
-		{
-			return count;
-		}
 
+	void remove(const T& value)
+	{
+		Node *removeElement = search(value);
+		
+		if (removeElement != nullptr && count > 0)
+		{
+			if (removeElement->left == nullptr)
+			{
+				_transplant(removeElement, removeElement->right);
+			}
+			else if (removeElement->right == nullptr)
+			{
+				_transplant(removeElement, removeElement->left);
+			}
+			else
+			{
+				Node *newLocalRoot = removeElement->left;
+				while (newLocalRoot->right != nullptr)
+				{
+					newLocalRoot = newLocalRoot->right;
+				}
+				if (newLocalRoot->parent != removeElement)
+				{
+					_transplant(newLocalRoot, newLocalRoot->right);
+					newLocalRoot->right = removeElement->right;
+					newLocalRoot->right->parent = newLocalRoot;
+				}
+				_transplant(removeElement, newLocalRoot);
+				newLocalRoot->right = removeElement->right;
+				newLocalRoot->right->parent = newLocalRoot;
+				_splay(newLocalRoot);
+			}
+			delete[] removeElement;
+			--count;
+		}
+	}
+
+
+	Node* search(T const& value)
+	{
+		Node* searchedNode = _search(value);
+		if(searchedNode)
+			_splay(searchedNode);
+		return searchedNode;
+	}
+
+	Node *getRoot()const
+	{
+		return root;
+	}
+
+	T* getKey(const T& value)
+	{
+		Node *node = _search(value);
+		if (node != nullptr)
+			return new T(node->key);
+		else
+			return nullptr;
+	}
+
+
+	std::size_t getCount()
+	{
+		return count;
+	}
+
+	T* getRightKey(const T& key)
+	{
+		Node *node = _search(key);
+		if (node != nullptr && node->right != nullptr)
+			return new T(node->right->key);
+		else
+			return nullptr;
+	}
+
+	T* getKeyRoot()
+	{
+		if (root)
+			return new T(root->key);
+		else
+			return nullptr;
+	}
+	T* getLeftKey(const T& key)
+	{
+		Node *node = _search(key);
+		if (node != nullptr && node->left != nullptr)
+			return new T(node->left->key);
+		else
+			return nullptr;
+	}
+
+
+	T* getParentKey(const T& key)
+	{
+		Node *node = _search(key);
+		if (node != nullptr && node->parent != nullptr)
+			return new T(node->parent->key);
+		else
+			return nullptr;
+	}
 };
 
 
