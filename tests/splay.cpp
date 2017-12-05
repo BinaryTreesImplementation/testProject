@@ -5,7 +5,7 @@
 TEST_CASE("insert_root", "[root]") {
    SplayTree<int> testSplayTree;
    testSplayTree.insert(10);
-   REQUIRE(testSplayTree.getKeyRoot() == 10);
+   REQUIRE(*testSplayTree.getKeyRoot() == 10);
    REQUIRE(testSplayTree.getLeftKey(10) == nullptr);
    REQUIRE(testSplayTree.getRightKey(10) == nullptr);
    REQUIRE(testSplayTree.getParentKey(10) == nullptr);
@@ -25,15 +25,15 @@ TEST_CASE("Inserting left child", "[ilch]") {
    SplayTree<int> testSplayTree;
    testSplayTree.insert(10);
    testSplayTree.insert(7);
-   REQUIRE(testSplayTree.getKeyRoot() == 7);
+   REQUIRE(*testSplayTree.getKeyRoot() == 7);
    REQUIRE(testSplayTree.getLeftKey(7) == nullptr);
-   REQUIRE(testSplayTree.getRightKey(7) == 10);
+   REQUIRE(*testSplayTree.getRightKey(7) == 10);
    REQUIRE(testSplayTree.getParentKey(7) == nullptr);
    REQUIRE(testSplayTree.getCount() == 2);
    REQUIRE(testSplayTree.getRoot() != 0);
    REQUIRE(testSplayTree.getLeftKey(10) == nullptr);
    REQUIRE(testSplayTree.getRightKey(10) == nullptr);
-   REQUIRE(testSplayTree.getParentKey(10) == 7);
+   REQUIRE(*testSplayTree.getParentKey(10) == 7);
 }
 
 /* 
@@ -48,15 +48,15 @@ TEST_CASE("Inserting right child", "[irch]") {
    SplayTree<int> testSplayTree;
    testSplayTree.insert(10);
    testSplayTree.insert(15);
-   REQUIRE(testSplayTree.getKeyRoot() == 15);
-   REQUIRE(testSplayTree.getLeftKey(15) == 10);
+   REQUIRE(*testSplayTree.getKeyRoot() == 15);
+   REQUIRE(*testSplayTree.getLeftKey(15) == 10);
    REQUIRE(testSplayTree.getRightKey(15) == nullptr);
    REQUIRE(testSplayTree.getParentKey(15) == nullptr);
    REQUIRE(testSplayTree.getCount() == 2);
    REQUIRE(testSplayTree.getRoot() != 0);
    REQUIRE(testSplayTree.getLeftKey(10) == nullptr);
    REQUIRE(testSplayTree.getRightKey(10) == nullptr);
-   REQUIRE(testSplayTree.getParentKey(10) == 15);
+   REQUIRE(*testSplayTree.getParentKey(10) == 15);
 }
 
 
@@ -75,18 +75,18 @@ TEST_CASE("Inserting right child with left brother", "[ilch]") {
    testSplayTree.insert(10);
    testSplayTree.insert(15);
    testSplayTree.insert(20);      
-   REQUIRE(testSplayTree.getKeyRoot() == 20);
-   REQUIRE(testSplayTree.getLeftKey(20) == 15);
+   REQUIRE(*testSplayTree.getKeyRoot() == 20);
+   REQUIRE(*testSplayTree.getLeftKey(20) == 15);
    REQUIRE(testSplayTree.getRightKey(20) == nullptr);
    REQUIRE(testSplayTree.getParentKey(20) == nullptr);
    REQUIRE(testSplayTree.getCount() == 3);
    REQUIRE(testSplayTree.getRoot() != 0);
-   REQUIRE(testSplayTree.getLeftKey(15) == 10);
+   REQUIRE(*testSplayTree.getLeftKey(15) == 10);
    REQUIRE(testSplayTree.getRightKey(15) == nullptr);
-   REQUIRE(testSplayTree.getParentKey(15) == 20);
+   REQUIRE(*testSplayTree.getParentKey(15) == 20);
    REQUIRE(testSplayTree.getLeftKey(10) == nullptr);
    REQUIRE(testSplayTree.getRightKey(10) == nullptr);
-   REQUIRE(testSplayTree.getParentKey(10) == 15);
+   REQUIRE(*testSplayTree.getParentKey(10) == 15);
 }
 
 /* 
@@ -105,18 +105,18 @@ TEST_CASE("Inserting right child with right parent", "[ilch]") {
    testSplayTree.insert(15);
    testSplayTree.insert(10);
    testSplayTree.insert(20);      
-   REQUIRE(testSplayTree.getKeyRoot() == 20);
-   REQUIRE(testSplayTree.getLeftKey(20) == 15);
+   REQUIRE(*testSplayTree.getKeyRoot() == 20);
+   REQUIRE(*testSplayTree.getLeftKey(20) == 15);
    REQUIRE(testSplayTree.getRightKey(20) == nullptr);
    REQUIRE(testSplayTree.getParentKey(20) == nullptr);
    REQUIRE(testSplayTree.getCount() == 3);
    REQUIRE(testSplayTree.getRoot() != 0);
-   REQUIRE(testSplayTree.getLeftKey(15) == 10);
+   REQUIRE(*testSplayTree.getLeftKey(15) == 10);
    REQUIRE(testSplayTree.getRightKey(15) == nullptr);
-   REQUIRE(testSplayTree.getParentKey(15) == 20);
+   REQUIRE(*testSplayTree.getParentKey(15) == 20);
    REQUIRE(testSplayTree.getLeftKey(10) == nullptr);
    REQUIRE(testSplayTree.getRightKey(10) == nullptr);
-   REQUIRE(testSplayTree.getParentKey(10) == 15);
+   REQUIRE(*testSplayTree.getParentKey(10) == 15);
 }
 
 /* 
@@ -135,18 +135,18 @@ TEST_CASE("Inserting left child with left parent", "[ilch]") {
    testSplayTree.insert(10);
    testSplayTree.insert(15);
    testSplayTree.insert(5);      
-   REQUIRE(testSplayTree.getKeyRoot() == 5);
+   REQUIRE(*testSplayTree.getKeyRoot() == 5);
    REQUIRE(testSplayTree.getLeftKey(5) == nullptr);
-   REQUIRE(testSplayTree.getRightKey(5) == 10);
+   REQUIRE(*testSplayTree.getRightKey(5) == 10);
    REQUIRE(testSplayTree.getParentKey(5) == nullptr);
    REQUIRE(testSplayTree.getCount() == 3);
    REQUIRE(testSplayTree.getRoot() != 0);
    REQUIRE(testSplayTree.getLeftKey(15) == nullptr);
    REQUIRE(testSplayTree.getRightKey(15) == nullptr);
-   REQUIRE(testSplayTree.getParentKey(15) == 10);
+   REQUIRE(*testSplayTree.getParentKey(15) == 10);
    REQUIRE(testSplayTree.getLeftKey(10) == nullptr);
-   REQUIRE(testSplayTree.getRightKey(10) == 15);
-   REQUIRE(testSplayTree.getParentKey(10) == 5);
+   REQUIRE(*testSplayTree.getRightKey(10) == 15);
+   REQUIRE(*testSplayTree.getParentKey(10) == 5);
 }
 
 TEST_CASE("Inserting left child with left parent", "[ilch]") {
@@ -154,18 +154,18 @@ TEST_CASE("Inserting left child with left parent", "[ilch]") {
    testSplayTree.insert(15);
    testSplayTree.insert(5);
    testSplayTree.insert(10);      
-   REQUIRE(testSplayTree.getKeyRoot() == 10);
-   REQUIRE(testSplayTree.getLeftKey(10) == 5);
-   REQUIRE(testSplayTree.getRightKey(10) == 15);
+   REQUIRE(*testSplayTree.getKeyRoot() == 10);
+   REQUIRE(*testSplayTree.getLeftKey(10) == 5);
+   REQUIRE(*testSplayTree.getRightKey(10) == 15);
    REQUIRE(testSplayTree.getParentKey(10) == nullptr);
    REQUIRE(testSplayTree.getCount() == 3);
    REQUIRE(testSplayTree.getRoot() != 0);
    REQUIRE(testSplayTree.getLeftKey(15) == nullptr);
    REQUIRE(testSplayTree.getRightKey(15) == nullptr);
-   REQUIRE(testSplayTree.getParentKey(15) == 10);
+   REQUIRE(*testSplayTree.getParentKey(15) == 10);
    REQUIRE(testSplayTree.getLeftKey(5) == nullptr);
    REQUIRE(testSplayTree.getRightKey(5) == nullptr);
-   REQUIRE(testSplayTree.getParentKey(5) == 10);
+   REQUIRE(*testSplayTree.getParentKey(5) == 10);
 }
 
 
@@ -185,7 +185,7 @@ TEST_CASE("remove right child", "[rrch]") {
    testSplayTree.insert(10);
    testSplayTree.remove(15);      
    REQUIRE(testSplayTree.getCount() == 1);
-   REQUIRE(testSplayTree.getRoot() == 10);
+   REQUIRE(*testSplayTree.getKeyRoot() == 10);
    REQUIRE(testSplayTree.getLeftKey(10) == nullptr);
    REQUIRE(testSplayTree.getRightKey(10) == nullptr);
    REQUIRE(testSplayTree.getParentKey(10) == nullptr);
@@ -198,7 +198,7 @@ TEST_CASE("remove left child", "[rlch]") {
    testSplayTree.insert(15);
    testSplayTree.remove(10);      
    REQUIRE(testSplayTree.getCount() == 1);
-   REQUIRE(testSplayTree.getRoot() == 15);
+   REQUIRE(*testSplayTree.getKeyRoot() == 15);
    REQUIRE(testSplayTree.getLeftKey(15) == nullptr);
    REQUIRE(testSplayTree.getRightKey(15) == nullptr);
    REQUIRE(testSplayTree.getParentKey(15) == nullptr);
@@ -213,16 +213,16 @@ TEST_CASE("remove left child with left child", "[rllch]") {
    testSplayTree.insert(14);
    testSplayTree.remove(12);      
    REQUIRE(testSplayTree.getCount() == 3);
-   REQUIRE(testSplayTree.getRoot() == 10);
+   REQUIRE(*testSplayTree.getKeyRoot() == 10);
    REQUIRE(testSplayTree.getLeftKey(10) == nullptr);
-   REQUIRE(testSplayTree.getRightKey(10) == 14);
+   REQUIRE(*testSplayTree.getRightKey(10) == 14);
    REQUIRE(testSplayTree.getParentKey(10) == nullptr);
    REQUIRE(testSplayTree.getLeftKey(14) == nullptr);
-   REQUIRE(testSplayTree.getRightKey(14) == 15);
-   REQUIRE(testSplayTree.getParentKey(14) == 10);
+   REQUIRE(*testSplayTree.getRightKey(14) == 15);
+   REQUIRE(*testSplayTree.getParentKey(14) == 10);
    REQUIRE(testSplayTree.getLeftKey(15) == nullptr);
    REQUIRE(testSplayTree.getRightKey(15) == nullptr);
-   REQUIRE(testSplayTree.getParentKey(15) == 14);
+   REQUIRE(*testSplayTree.getParentKey(15) == 14);
 }
 
 
@@ -234,16 +234,16 @@ TEST_CASE("remove right child with right child", "[rrrch]") {
    testSplayTree.insert(13);
    testSplayTree.remove(16);     
    REQUIRE(testSplayTree.getCount() == 3);
-   REQUIRE(testSplayTree.getRoot() == 13);
-   REQUIRE(testSplayTree.getLeftKey(13) == 12);
-   REQUIRE(testSplayTree.getRightKey(13) == 20);
+   REQUIRE(*testSplayTree.getKeyRoot() == 13);
+   REQUIRE(*testSplayTree.getLeftKey(13) == 12);
+   REQUIRE(*testSplayTree.getRightKey(13) == 20);
    REQUIRE(testSplayTree.getParentKey(13) == nullptr);
    REQUIRE(testSplayTree.getLeftKey(12) == nullptr);
    REQUIRE(testSplayTree.getRightKey(12) == nullptr);
-   REQUIRE(testSplayTree.getParentKey(12) == 13);
+   REQUIRE(*testSplayTree.getParentKey(12) == 13);
    REQUIRE(testSplayTree.getLeftKey(20) == nullptr);
    REQUIRE(testSplayTree.getRightKey(20) == nullptr);
-   REQUIRE(testSplayTree.getParentKey(20) == 13);
+   REQUIRE(*testSplayTree.getParentKey(20) == 13);
 }
 
 TEST_CASE("remove right child with right and left child", "[rrrch]") {
@@ -255,19 +255,19 @@ TEST_CASE("remove right child with right and left child", "[rrrch]") {
    testSplayTree.insert(17);
    testSplayTree.remove(13);     
    REQUIRE(testSplayTree.getCount() == 4);
-   REQUIRE(testSplayTree.getRoot() == 12);
+   REQUIRE(*testSplayTree.getKeyRoot() == 12);
    REQUIRE(testSplayTree.getLeftKey(12) == nullptr);
-   REQUIRE(testSplayTree.getRightKey(12) == 17);
+   REQUIRE(*testSplayTree.getRightKey(12) == 17);
    REQUIRE(testSplayTree.getParentKey(12) == nullptr);
-   REQUIRE(testSplayTree.getLeftKey(17) == 16);
-   REQUIRE(testSplayTree.getRightKey(17) == 20);
-   REQUIRE(testSplayTree.getParentKey(17) == 12);
+   REQUIRE(*testSplayTree.getLeftKey(17) == 16);
+   REQUIRE(*testSplayTree.getRightKey(17) == 20);
+   REQUIRE(*testSplayTree.getParentKey(17) == 12);
    REQUIRE(testSplayTree.getLeftKey(20) == nullptr);
    REQUIRE(testSplayTree.getRightKey(20) == nullptr);
-   REQUIRE(testSplayTree.getParentKey(20) == 17);
+   REQUIRE(*testSplayTree.getParentKey(20) == 17);
    REQUIRE(testSplayTree.getLeftKey(16) == nullptr);
    REQUIRE(testSplayTree.getRightKey(16) == nullptr);
-   REQUIRE(testSplayTree.getParentKey(16) == 17);
+   REQUIRE(*testSplayTree.getParentKey(16) == 17);
 }
 
 
@@ -280,19 +280,19 @@ TEST_CASE("remove left child with right and left child", "[rrrch]") {
    testSplayTree.insert(17);
    testSplayTree.remove(21);     
    REQUIRE(testSplayTree.getCount() == 4);
-   REQUIRE(testSplayTree.getRoot() == 12);
+   REQUIRE(*testSplayTree.getKeyRoot() == 12);
    REQUIRE(testSplayTree.getLeftKey(12) == nullptr);
-   REQUIRE(testSplayTree.getRightKey(12) == 21);
+   REQUIRE(*testSplayTree.getRightKey(12) == 21);
    REQUIRE(testSplayTree.getParentKey(12) == nullptr);
-   REQUIRE(testSplayTree.getLeftKey(21) == 20);
+   REQUIRE(*testSplayTree.getLeftKey(21) == 20);
    REQUIRE(testSplayTree.getRightKey(21) == nullptr);
-   REQUIRE(testSplayTree.getParentKey(21) == 12);
-   REQUIRE(testSplayTree.getLeftKey(20) == 16);
+   REQUIRE(*testSplayTree.getParentKey(21) == 12);
+   REQUIRE(*testSplayTree.getLeftKey(20) == 16);
    REQUIRE(testSplayTree.getRightKey(20) == nullptr);
-   REQUIRE(testSplayTree.getParentKey(20) == 21);
+   REQUIRE(*testSplayTree.getParentKey(20) == 21);
    REQUIRE(testSplayTree.getLeftKey(16) == nullptr);
    REQUIRE(testSplayTree.getRightKey(16) == nullptr);
-   REQUIRE(testSplayTree.getParentKey(16) == 20);
+   REQUIRE(*testSplayTree.getParentKey(16) == 20);
 }
 
 
@@ -303,14 +303,14 @@ TEST_CASE("search", "[s]") {
    testSplayTree.insert(16);
    testSplayTree.search(20);
    REQUIRE(testSplayTree.getCount() == 3);
-   REQUIRE(testSplayTree.getRoot() == 20);
-   REQUIRE(testSplayTree.getLeftKey(20) == 16);
+   REQUIRE(*testSplayTree.getKeyRoot() == 20);
+   REQUIRE(*testSplayTree.getLeftKey(20) == 16);
    REQUIRE(testSplayTree.getRightKey(20) == nullptr);
    REQUIRE(testSplayTree.getParentKey(20) == nullptr);
-   REQUIRE(testSplayTree.getLeftKey(16) == 14);
+   REQUIRE(*testSplayTree.getLeftKey(16) == 14);
    REQUIRE(testSplayTree.getRightKey(16) == nullptr);
-   REQUIRE(testSplayTree.getParentKey(16) == 20);
+   REQUIRE(*testSplayTree.getParentKey(16) == 20);
    REQUIRE(testSplayTree.getLeftKey(14) == nullptr);
    REQUIRE(testSplayTree.getRightKey(14) == nullptr);
-   REQUIRE(testSplayTree.getParentKey(14) == 16);
+   REQUIRE(*testSplayTree.getParentKey(14) == 16);
 }
