@@ -285,9 +285,9 @@ TEST_CASE("remove left child with right and left child", "[rrrch]") {
    REQUIRE(*testSplayTree.getRightKey(12) == 17);
    REQUIRE(testSplayTree.getParentKey(12) == nullptr);
    REQUIRE(*testSplayTree.getLeftKey(17) == 16);
-   REQUIRE(testSplayTree.getRightKey(17) == 20);
+   REQUIRE(*testSplayTree.getRightKey(17) == 20);
    REQUIRE(*testSplayTree.getParentKey(17) == 12);
-   REQUIRE(*testSplayTree.getLeftKey(20) == nullptr);
+   REQUIRE(testSplayTree.getLeftKey(20) == nullptr);
    REQUIRE(testSplayTree.getRightKey(20) == nullptr);
    REQUIRE(*testSplayTree.getParentKey(20) == 17);
    REQUIRE(testSplayTree.getLeftKey(16) == nullptr);
