@@ -149,7 +149,7 @@ TEST_CASE("Inserting left child with left parent", "[ilch]") {
    REQUIRE(*testSplayTree.getParentKey(10) == 5);
 }
 
-TEST_CASE("Inserting left child with left parent", "[ilch]") {
+TEST_CASE("Inserting left child with left parent2", "[ilch]") {
    SplayTree<int> testSplayTree;
    testSplayTree.insert(15);
    testSplayTree.insert(5);
