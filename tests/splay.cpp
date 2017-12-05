@@ -296,3 +296,21 @@ TEST_CASE("remove left child with right and left child", "[rrrch]") {
 }
 
 
+TEST_CASE("search", "[s]") {
+   SplayTree<int> testSplayTree;
+   testSplayTree.insert(20);
+   testSplayTree.insert(14);
+   testSplayTree.insert(16);
+   testSplayTree.search(20);
+   REQUIRE(testSplayTree.getCount() == 3);
+   REQUIRE(testSplayTree.getRoot() == 20);
+   REQUIRE(testSplayTree.getLeftKey(20) == 16);
+   REQUIRE(testSplayTree.getRightKey(20) == nullptr);
+   REQUIRE(testSplayTree.getParentKey(20) == nullptr);
+   REQUIRE(testSplayTree.getLeftKey(16) == 14);
+   REQUIRE(testSplayTree.getRightKey(16) == nullptr);
+   REQUIRE(testSplayTree.getParentKey(16) == 20);
+   REQUIRE(testSplayTree.getLeftKey(14) == nullptr);
+   REQUIRE(testSplayTree.getRightKey(14) == nullptr);
+   REQUIRE(testSplayTree.getParentKey(14) == 16);
+}
