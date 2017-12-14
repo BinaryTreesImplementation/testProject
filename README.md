@@ -1,9 +1,17 @@
 [![Build Status](https://travis-ci.org/BinaryTreesImplementation/SplayTree.svg?branch=master)](https://travis-ci.org/BinaryTreesImplementation/SplayTree) 
 
-TEST
-```
-cmake -H. -B_builds -DBUILD_TESTS=ON -DBUILD_EXAMPLES=ON
-cmake --build _builds
-cmake --build _builds --target test -- ARGS=--verbose
-_builds/example
-```
+# Splay-дерево
+---
+## Краткое описание
+Splay-дерево — это самобалансирующееся бинарное дерево поиска. Дереву не нужно хранить никакой дополнительной информации, что делает его эффективным по памяти. После каждого обращения, даже поиска, splay-дерево меняет свою структуру. 
+Главным недостатком данной структуры данных является возможность ее вырождения в двусвязный список. 
+
+## Реализация
+Данное бинарное дерево поиска реализовано на языке программирования С++. 
+
+Методы доступные для использования: 
++ Insert
++ Remove
++ Search
+
+
