@@ -63,11 +63,11 @@ TEST_CASE("Inserting right child", "[irch]") {
 /* 
 Inserting right child with left brother
 
-	10	         15           15		      20
-	  \   ->    /     ->     /  \    ->      /
-	   15 	  10	       10    20	       15
-	   				                      /	
-	                                    10
+	10	    15            15		   20
+	  \   ->    /     ->     /  \    ->        /
+	   15 	   10	       10    20	         15
+	   				         /	
+	                                       10
 */
 
 TEST_CASE("Inserting right child with left brother", "[ilch]") {
@@ -92,11 +92,11 @@ TEST_CASE("Inserting right child with left brother", "[ilch]") {
 /* 
 Inserting left child with right brother
 
-	15	   	  10             10	                   20
+	15	  10             10	               20
 	/   ->      \      ->      \       ->         /
-  10    	     15		        15		        15
-	   			                  \ 		   /	
-	  		  	                   20	     10
+      10    	     15		    15		     15
+	   			      \             /	
+	  		  	       20	   10
 */
 
 
@@ -122,11 +122,11 @@ TEST_CASE("Inserting right child with right parent", "[ilch]") {
 /* 
 Inserting left child with left brother
 
-	10	      	   15             15	       5
-	  \    ->     /     ->       /       ->     \
-	   15	    10		       10		         10
-	   		                  / 		           \
-	  		                 5	                    15
+	10	       15             15	       5
+	  \    ->     /     ->       /       ->         \
+	   15	    10		   10		         10
+	   		          / 		           \
+	  		         5	                    15
 */
 
 
@@ -152,7 +152,7 @@ TEST_CASE("Inserting left child with left parent", "[ilch]") {
 /*
 	5				 10
 	 \		->		/  \	
-	  10		   5   15
+	  10		               5   15
 */
 
 TEST_CASE("Inserting left child with left parent2", "[ilch]") {
@@ -209,8 +209,8 @@ TEST_CASE("remove right child", "[rrch]") {
 
 /*
 	 15			
-	/	   ->	15
-  10
+	/	->	15
+      10
 */
 
 TEST_CASE("remove left child", "[rlch]") {
@@ -225,11 +225,11 @@ TEST_CASE("remove left child", "[rlch]") {
    REQUIRE(testSplayTree.getParentKey(15) == nullptr);
 }
 /*
-		14			10
+	    14			10
 	   /  \			  \	
 	  12   15	-> 	   14	
-	 /					 \
-	10 					  15
+	 /	   		     \
+	10 			      15
 */
 
 TEST_CASE("remove left child with left child", "[rllch]") {
@@ -253,11 +253,11 @@ TEST_CASE("remove left child with left child", "[rllch]") {
 }
 
 /*
-		13					13
-   	   /  \				   /  \
-	 12	   16		->	 12    20
- 		 	 \
-		  	  20
+	    13		       	    13
+   	   /  \			   /  \
+	 12    16	->	 12    20
+ 		 \
+		  20
 */
 
 TEST_CASE("remove right child with right child", "[rrrch]") {
@@ -279,32 +279,13 @@ TEST_CASE("remove right child with right child", "[rrrch]") {
    REQUIRE(testSplayTree.getRightKey(20) == nullptr);
    REQUIRE(*testSplayTree.getParentKey(20) == 13);
 }
-
-TEST_CASE("remove right child with right and left child", "[rrrch]") {
-   SplayTree<int> testSplayTree;
-   testSplayTree.insert(20);
-   testSplayTree.insert(12);
-   testSplayTree.insert(16);
-   testSplayTree.insert(13);
-   testSplayTree.insert(17);
-   testSplayTree.remove(13);     
-   REQUIRE(testSplayTree.getCount() == 4);
-   REQUIRE(*testSplayTree.getKeyRoot() == 12);
-   REQUIRE(testSplayTree.getLeftKey(12) == nullptr);
-   REQUIRE(*testSplayTree.getRightKey(12) == 17);
-   REQUIRE(testSplayTree.getParentKey(12) == nullptr);
-   REQUIRE(*testSplayTree.getLeftKey(17) == 16);
-   REQUIRE(*testSplayTree.getRightKey(17) == 20);
-   REQUIRE(*testSplayTree.getParentKey(17) == 12);
-   REQUIRE(testSplayTree.getLeftKey(20) == nullptr);
-   REQUIRE(testSplayTree.getRightKey(20) == nullptr);
-   REQUIRE(*testSplayTree.getParentKey(20) == 17);
-   REQUIRE(testSplayTree.getLeftKey(16) == nullptr);
-   REQUIRE(testSplayTree.getRightKey(16) == nullptr);
-   REQUIRE(*testSplayTree.getParentKey(16) == 17);
-}
-
-
+/*
+	    17		       	    12
+   	   /  \			      \
+	 13    20	  ->	       17
+ 	/  \	 		      /  \
+      12    16	                    16    20
+*/
 TEST_CASE("remove left child with right and left child", "[rrrch]") {
    SplayTree<int> testSplayTree;
    testSplayTree.insert(20);
@@ -328,7 +309,45 @@ TEST_CASE("remove left child with right and left child", "[rrrch]") {
    REQUIRE(testSplayTree.getRightKey(16) == nullptr);
    REQUIRE(*testSplayTree.getParentKey(16) == 17);
 }
-
+/*
+	    13		       	    20
+   	   /  \			   /  \
+	 11    20	->	 13    21
+ 		 \              /
+		  22           11
+                 /
+	        21
+*/
+TEST_CASE("remove right child with left child", "[rrrch]") {
+   SplayTree<int> testSplayTree;
+   testSplayTree.insert(20);
+   testSplayTree.insert(21);
+   testSplayTree.insert(22);
+   testSplayTree.insert(11);
+   testSplayTree.insert(13);
+   testSplayTree.remove(22);     
+   REQUIRE(testSplayTree.getCount() == 4);
+   REQUIRE(*testSplayTree.getKeyRoot() == 20);
+   REQUIRE(*testSplayTree.getLeftKey(20) == 13);
+   REQUIRE(*testSplayTree.getRightKey(20) == 21);
+   REQUIRE(testSplayTree.getParentKey(20) == nullptr);
+   REQUIRE(*testSplayTree.getLeftKey(13) == 11);
+   REQUIRE(testSplayTree.getRightKey(13) == nullptr);
+   REQUIRE(*testSplayTree.getParentKey(13) == 20);
+   REQUIRE(testSplayTree.getLeftKey(11) == nullptr);
+   REQUIRE(testSplayTree.getRightKey(11) == nullptr);
+   REQUIRE(*testSplayTree.getParentKey(11) == 13);
+   REQUIRE(testSplayTree.getLeftKey(21) == nullptr);
+   REQUIRE(testSplayTree.getRightKey(21) == nullptr);
+   REQUIRE(*testSplayTree.getParentKey(21) == 20);
+}
+/*
+	16		     20
+       /  \       ->         /
+     14    20              16
+                           /
+		         14
+*/
 
 TEST_CASE("search", "[s]") {
    SplayTree<int> testSplayTree;
