@@ -7,13 +7,14 @@ HunterGate(
 )
 
 project(testProject)
+hunter_add_package(SplayTree)
+find_package(SplayTree REQUIRED)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 option(BUILD_TESTS "Build tests" OFF)
 option(BUILD_EXAMPLES "Build Examples" OFF)
-hunter_add_package(SplayTree)
-find_package(SplayTree CONFIG REQUIRED)
+
 add_library(${PROJECT_NAME} INTERFACE)
 target_sources(${PROJECT_NAME} INTERFACE "${PROJECT_SOURCE_DIR}/include/test.h")
 
