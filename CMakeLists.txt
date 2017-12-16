@@ -14,7 +14,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 option(BUILD_TESTS "Build tests" OFF)
 option(BUILD_EXAMPLES "Build Examples" OFF)
-hunter_add_package(SplayTree)
+
 add_library(${PROJECT_NAME} INTERFACE)
 target_sources(${PROJECT_NAME} INTERFACE "${PROJECT_SOURCE_DIR}/include/test.h")
 
@@ -22,8 +22,8 @@ target_include_directories(${PROJECT_NAME} INTERFACE "${PROJECT_SOURCE_DIR}/incl
 
 if(BUILD_TESTS)
   hunter_add_package(Catch)
- 
- 
+  hunter_add_package(SplayTree)
+  find_package(SplayTree)
   find_package(Catch CONFIG REQUIRED)
   
   enable_testing()
