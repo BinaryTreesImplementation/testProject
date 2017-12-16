@@ -6,7 +6,7 @@
     nullptr     ->      10
 */
 
-TEST_CASE("insert_root", "[root]") {
+TEST_CASE("insert_rootT", "[root]") {
    Treap<int> testTreap;
    testTreap.Insert(10);
    REQUIRE(*testTreap.getKeyRoot() == 10);
@@ -26,7 +26,7 @@ else
     		     \
 		      10
 */
-TEST_CASE("Inserting left child", "[ilch]") {
+TEST_CASE("Inserting left childT", "[ilch]") {
    Treap<int> testTreap;
    testTreap.Insert(10);
    testTreap.Insert(7);
@@ -50,7 +50,7 @@ else
     		   /
 		  10
 */
-TEST_CASE("Inserting right child", "[irch]") {
+TEST_CASE("Inserting right childT", "[irch]") {
    Treap<int> testTreap;
    testTreap.Insert(10);
    testTreap.Insert(75);
@@ -113,7 +113,7 @@ if "10" priority < "25" priority < "75" priority
                                      /
 		                   10
 */
-TEST_CASE("Inserting", "[irch]") {
+TEST_CASE("InsertingT", "[irch]") {
 	Treap<int> testTreap;
 	testTreap.Insert(10);
 	testTreap.Insert(75);
@@ -145,7 +145,7 @@ TEST_CASE("Inserting", "[irch]") {
       nullptr  ->    10    ->    nullptr
 */
 
-  TEST_CASE("remove root", "[irch]") {
+  TEST_CASE("remove rootT", "[irch]") {
 	Treap<int> testTreap;
 	testTreap.Insert(10);
 	testTreap.Remove(10);
@@ -163,7 +163,7 @@ else
     		   /
 		  10
 */
-  TEST_CASE("remove list", "[irch]") {
+  TEST_CASE("remove listT", "[irch]") {
 	Treap<int> testTreap;
 	testTreap.Insert(10);
 	testTreap.Insert(11);
