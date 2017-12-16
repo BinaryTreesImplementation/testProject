@@ -8,25 +8,33 @@ HunterGate(
 
 project(testProject)
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+### Download dependencies ###
+hunter_add_package(SplayTree)
 
-option(BUILD_TESTS "Build tests" OFF)
-option(BUILD_EXAMPLES "Build Examples" OFF)
+### Find dependencies ###
+find_package(SplayTree CONFIG REQUIRED) # GTest::main
 
-if(BUILD_TESTS)
-  hunter_add_package(Catch)
-  hunter_add_package(SplayTree)
-  find_package(SplayTree CONFIG REQUIRED)
+### Targets ###
+file(GLOB ${PROJECT_NAME}_TEST_SOURCES tests/*.cpp)
+add_executable(tests ${${PROJECT_NAME}_TEST_SOURCES})
+target_link_libraries(tests ${PROJECT_NAME} SplayTree::SplayTree )
 
-  find_package(Catch CONFIG REQUIRED)
-  
-  enable_testing()
 
-  file(GLOB ${PROJECT_NAME}_TEST_SOURCES tests/*.cpp)
-  add_executable(tests ${${PROJECT_NAME}_TEST_SOURCES})
-  target_link_libraries(tests ${PROJECT_NAME} Catch::Catch )
-  target_link_libraries(tests ${PROJECT_NAME} SplayTree::SplayTree )
-  add_test(NAME test_name COMMAND tests "-s" "-r" "compact" "--use-colour" "yes") 
+### Testing ###
+enable_testing()
+
+if(IOS)
+  # Extra cmake modules needed for iOS testing:
+  # * https://github.com/ruslo/sugar/tree/master/cmake/core#sugar_add_ios_gtest
+  add_test(
+      NAME SimpleTest COMMAND "${CMAKE_COMMAND}" -E echo "iOS testing ignored"
+  )
+elseif(ANDROID)
+  # Building .apk, testing: https://github.com/forexample/android-cmake
+  add_test(
+      NAME SimpleTest
+      COMMAND "${CMAKE_COMMAND}" -E echo "Android testing ignored"
+  )
+else()
+  add_test(NAME SimpleTest COMMAND testProject)
 endif()
-
