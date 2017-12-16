@@ -23,7 +23,7 @@ if(BUILD_TESTS)
   hunter_add_package(Catch)
   hunter_add_package(SplayTree)
   find_package(Catch CONFIG REQUIRED)
-  find_package(SplayTree CONFIG REQUIRED)
+  
   enable_testing()
 
   file(GLOB ${PROJECT_NAME}_TEST_SOURCES tests/*.cpp)
