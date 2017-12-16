@@ -1,6 +1,6 @@
 #include <catch.hpp>
 
-#include "test.h"
+#include "splay.h"
 
 TEST_CASE("insert_root", "[root]") {
    SplayTree<int> testSplayTree;
