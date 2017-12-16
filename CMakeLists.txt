@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.8)
 
 include("cmake/HunterGate.cmake")
 HunterGate(
-    URL "https://github.com/BinaryTreesImplementation/hunter/archive/v0.19.137.9.tar.gz"
-    SHA1 "728b2fabe5a78be35f37df0967e4c50b060fadda"
+    URL "https://github.com/BinaryTreesImplementation/hunter/archive/v0.19.137.10.tar.gz"
+    SHA1 "c54d4c871c7175f8c19d45aae2797d1d4469660d"
 )
 
 
@@ -22,6 +22,7 @@ target_include_directories(${PROJECT_NAME} INTERFACE "${PROJECT_SOURCE_DIR}/incl
 if(BUILD_TESTS)
   hunter_add_package(Catch)
   hunter_add_package(SplayTree)
+  hunter_add_package(Treap)
   find_package(Catch CONFIG REQUIRED)
   
   enable_testing()
