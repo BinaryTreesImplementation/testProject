@@ -1,65 +1,123 @@
-language: cpp
-sudo: false
+# OSX/Linux (https://github.com/travis-ci-tester/toolchain-table)
+
+language:
+  - cpp
+
+# Container-based infrastructure (Linux)
+# * https://docs.travis-ci.com/user/migrating-from-legacy/#How-can-I-use-container-based-infrastructure%3F
+sudo:
+  - false
+
 dist:
   - trusty
+
 matrix:
   include:
+    # Linux {
     - os: linux
-      compiler: gcc
-      addons: &gcc7
-        apt:
-          sources: ['ubuntu-toolchain-r-test']
-          packages: ['g++-7']
-      env: CXX_EVAL="g++-7" CC_EVAL="gcc-7" BUILD_TYPE='Release'
+      env: CONFIG=Release TOOLCHAIN=default
+    - os: linux
+      env: CONFIG=Debug TOOLCHAIN=default
 
-    - os: linux
-      compiler: gcc
-      addons: *gcc7
-      env: CXX_EVAL="g++-7" CC_EVAL="gcc-7" BUILD_TYPE='Debug'
-
-    - os: linux
-      compiler: clang
-      env: BUILD_TYPE='Release' CXX_EVAL="clang++-5.0" CC_EVAL="clang-5.0"
-      addons:
-        apt:
-          sources:
-            - sourceline: 'deb http://apt.llvm.org/trusty/ llvm-toolchain-trusty-5.0 main' 
-              key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
-            - ubuntu-toolchain-r-test
-          packages: ['clang-5.0']
+    # Lack of C++11 support
+    # - os: linux
+    #   env: CONFIG=Release TOOLCHAIN=clang-libstdcxx
+    # - os: linux
+    #   env: CONFIG=Debug TOOLCHAIN=clang-libstdcxx
 
     - os: linux
-      compiler: clang
-      env: BUILD_TYPE='Debug' CXX_EVAL="clang++-5.0" CC_EVAL="clang-5.0"
-      addons:
-        apt:
-          sources:
-            - sourceline: 'deb http://apt.llvm.org/trusty/ llvm-toolchain-trusty-5.0 main' 
-              key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
-            - ubuntu-toolchain-r-test
-          packages: ['clang-5.0']
-          
+      env: CONFIG=Release TOOLCHAIN=gcc
+    - os: linux
+      env: CONFIG=Debug TOOLCHAIN=gcc
+    - os: linux
+      env: CONFIG=Release TOOLCHAIN=android-ndk-r10e-api-19-armeabi-v7a-neon
+    - os: linux
+      env: CONFIG=Debug TOOLCHAIN=android-ndk-r10e-api-19-armeabi-v7a-neon
+    - os: linux
+      env: CONFIG=Release TOOLCHAIN=analyze
+    - os: linux
+      env: CONFIG=Debug TOOLCHAIN=analyze
+    - os: linux
+      env: CONFIG=Release TOOLCHAIN=sanitize-address
+    - os: linux
+      env: CONFIG=Debug TOOLCHAIN=sanitize-address
+    - os: linux
+      env: CONFIG=Release TOOLCHAIN=sanitize-leak
+    - os: linux
+      env: CONFIG=Debug TOOLCHAIN=sanitize-leak
 
+    # FIXME: https://github.com/ruslo/hunter/issues/718#issuecomment-290610583
+    # - os: linux
+    #   env: CONFIG=Release TOOLCHAIN=sanitize-thread
+    # - os: linux
+    #   env: CONFIG=Debug TOOLCHAIN=sanitize-thread
 
-before_install:
-  - export CXX=$CXX_EVAL
-  - export CC=$CC_EVAL
-  - export CXXFLAGS="-Werror"
+    # }
+
+    # OSX {
+    - os: osx
+      env: CONFIG=Release TOOLCHAIN=default
+    - os: osx
+      env: CONFIG=Debug TOOLCHAIN=default
+    - os: osx
+      env: CONFIG=Release TOOLCHAIN=libcxx
+    - os: osx
+      env: CONFIG=Debug TOOLCHAIN=libcxx
+
+    # Lack of C++11 support
+    # - os: osx
+    #   env: CONFIG=Release TOOLCHAIN=clang-libstdcxx
+    # - os: osx
+    #   env: CONFIG=Debug TOOLCHAIN=clang-libstdcxx
+
+    - os: osx
+      env: CONFIG=Release TOOLCHAIN=osx-10-11
+    - os: osx
+      env: CONFIG=Debug TOOLCHAIN=osx-10-11
+    - os: osx
+      env: CONFIG=Release TOOLCHAIN=ios-nocodesign-9-3
+    - os: osx
+      env: CONFIG=Debug TOOLCHAIN=ios-nocodesign-9-3
+    - os: osx
+      env: CONFIG=Release TOOLCHAIN=android-ndk-r10e-api-19-armeabi-v7a-neon
+    - os: osx
+      env: CONFIG=Debug TOOLCHAIN=android-ndk-r10e-api-19-armeabi-v7a-neon
+    - os: osx
+      env: CONFIG=Release TOOLCHAIN=analyze
+    - os: osx
+      env: CONFIG=Debug TOOLCHAIN=analyze
+    # }
 
 install:
-  - DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
-  - mkdir -p ${DEPS_DIR} && cd ${DEPS_DIR}
-  - |
-    if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
-      CMAKE_URL="https://cmake.org/files/v3.9/cmake-3.9.4-Linux-x86_64.tar.gz"
-      mkdir cmake && travis_retry wget --no-check-certificate --quiet -O - ${CMAKE_URL} | tar --strip-components=1 -xz -C cmake
-      export PATH=${DEPS_DIR}/cmake/bin:${PATH}
-    fi
-before_script:
-  - which $CXX
-  - $CXX --version
-  - cd ${TRAVIS_BUILD_DIR}
-  - cmake -H. -B_builds -DBUILD_TESTS=ON
+  # Info about OS
+  - uname -a
+
+  # Install Python 3
+  - if [[ "`uname`" == "Darwin" ]]; then travis_retry brew install python3; fi
+
+  # Install Python package 'requests'
+  # 'easy_install3' is not installed by 'brew install python3' on OS X 10.9 Maverick
+  - if [[ "`uname`" == "Darwin" ]]; then pip3 install requests; fi
+  - if [[ "`uname`" == "Linux" ]]; then travis_retry pip3 install --user requests; fi
+
+  # Install latest Polly toolchains and scripts
+  - wget https://github.com/ruslo/polly/archive/master.zip
+  - unzip master.zip
+  - POLLY_ROOT="`pwd`/polly-master"
+  - export PATH="${POLLY_ROOT}/bin:${PATH}"
+
+  # Install dependencies (CMake, Android NDK)
+  - install-ci-dependencies.py
+
+  # Tune locations
+  - export PATH="`pwd`/_ci/cmake/bin:${PATH}"
+
+  # Installed if toolchain is Android (otherwise directory doesn't exist)
+  - export ANDROID_NDK_r10e="`pwd`/_ci/android-ndk-r10e"
+
 script:
-- cmake --build _builds
-- cmake --build _builds --target test -- ARGS=--verbose
+  - build.py --toolchain ${TOOLCHAIN} --config ${CONFIG} --verbose --test
+
+branches:
+  except:
+    - /^pr\..*/
