@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.8)
 
 include("cmake/HunterGate.cmake")
 HunterGate(
-    URL "https://github.com/BinaryTreesImplementation/hunter/archive/v0.19.137.8.tar.gz"
-    SHA1 "30bdface2e1e73a3ec9fc24d42ed4b7178064b26"
+    URL "https://github.com/BinaryTreesImplementation/hunter/archive/v0.19.137.9.tar.gz"
+    SHA1 "728b2fabe5a78be35f37df0967e4c50b060fadda"
 )
 
 
