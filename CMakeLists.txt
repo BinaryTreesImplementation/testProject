@@ -23,6 +23,8 @@ if(BUILD_TESTS)
   hunter_add_package(Catch)
   hunter_add_package(SplayTree)
   hunter_add_package(Treap)
+  hunter_add_package(RedBlackTree)
+  hunter_add_package(AVL-tree)
   find_package(Catch CONFIG REQUIRED)
   
   enable_testing()
