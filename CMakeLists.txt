@@ -25,6 +25,8 @@ if(BUILD_TESTS)
   hunter_add_package(Treap)
   hunter_add_package(RedBlackTree)
   hunter_add_package(AVL-tree)
+  hunter_add_package(AA-tree)
+  hunter_add_package(BinaryTreeSearch)
   find_package(Catch CONFIG REQUIRED)
   
   enable_testing()
