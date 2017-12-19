@@ -32,7 +32,7 @@ TEST_CASE("AVL", "[1]")
 	   tree2.insert(i);
    }
    
-   REQUIRE(tree.count() == 50);
+   REQUIRE(tree2.count() == 50);
    for (size_t i = 0; i < 50; ++i)
    {
 	   tree2.deleteElement(i);
@@ -47,7 +47,7 @@ TEST_CASE("Splay", "[3]")
 	   tree3.insert(i);
    }
    
-   REQUIRE(tree.getCounter() == 50);
+   REQUIRE(tree3.getCounter() == 50);
    for (size_t i = 0; i < 50; ++i)
    {
 	   tree3.remove(i);
@@ -64,7 +64,7 @@ TEST_CASE("Treap", "[4]")
 	   tree4.Insert(i);
    }
    
-   REQUIRE(tree.getCount() == 50);
+   REQUIRE(tree4.getCount() == 50);
    for (size_t i = 0; i < 50; ++i)
    {
 	   tree4.Remove(i);
@@ -81,7 +81,7 @@ TEST_CASE("AATree", "[5]")
 	   tree5.insert(i);
    }
    
-  REQUIRE(tree.getcount() == 50);
+  REQUIRE(tree5.getcount() == 50);
    for (size_t i = 0; i < 50; ++i)
    {
 	   tree5.remove(i);
@@ -98,7 +98,7 @@ TEST_CASE("BST", "[6]")
 	   tree6.insert(i);
    }
    
-  REQUIRE(tree.get_count() == 50);
+  REQUIRE(tree6.get_count() == 50);
    for (size_t i = 0; i < 50; ++i)
    {
 	   tree6.remove(i);
