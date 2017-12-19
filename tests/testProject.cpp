@@ -8,7 +8,21 @@
 #include "BST.hpp"
 
 
-
+TEST_CASE("rbt", "[31]") 
+{
+    Tree<int> tree3;
+    for (size_t i = 0; i < 50; ++i)
+   {
+	   tree3.insert(i);
+   }
+   
+   //REQUIRE(tree.getCounter() == 50);
+   for (size_t i = 0; i < 50; ++i)
+   {
+	   tree3.deleteElement(i);
+   }
+   REQUIRE(tree3.count() == 0);
+}
     /*
 TEST_CASE("RBT", "[2]") 
 {
