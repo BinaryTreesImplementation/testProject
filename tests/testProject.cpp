@@ -7,23 +7,7 @@
 #include "AATree.hpp"
 #include "BST.hpp"
 
-/*
-TEST_CASE("rbt", "[31]") 
-{
-    Tree<int> tree3;
-    for (size_t i = 0; i < 50; ++i)
-   {
-	   tree3.insert(i);
-   }
-   
-   //REQUIRE(tree.getCounter() == 50);
-   for (size_t i = 0; i < 50; ++i)
-   {
-	   tree3.deleteElement(i);
-   }
-   REQUIRE(tree3.count() == 0);
-}
-    /*
+
 TEST_CASE("RBT", "[2]") 
 {
    Tree<int> tree1;
@@ -32,7 +16,7 @@ TEST_CASE("RBT", "[2]")
 	   tree1.insert(i);
    }
    
-   //REQUIRE(tree.count() == 50);
+   REQUIRE(tree.count() == 50);
    for (size_t i = 0; i < 50; ++i)
    {
 	   tree1.deleteElement(i);
@@ -48,13 +32,13 @@ TEST_CASE("AVL", "[1]")
 	   tree2.insert(i);
    }
    
-   //REQUIRE(tree.count() == 50);
+   REQUIRE(tree.count() == 50);
    for (size_t i = 0; i < 50; ++i)
    {
 	   tree2.deleteElement(i);
    }
    REQUIRE(tree2.count() == 0);
-}    */ 
+}  
 TEST_CASE("Splay", "[3]") 
 {
     SplayTree<int> tree3;
@@ -63,7 +47,7 @@ TEST_CASE("Splay", "[3]")
 	   tree3.insert(i);
    }
    
-   //REQUIRE(tree.getCounter() == 50);
+   REQUIRE(tree.getCounter() == 50);
    for (size_t i = 0; i < 50; ++i)
    {
 	   tree3.remove(i);
@@ -80,7 +64,7 @@ TEST_CASE("Treap", "[4]")
 	   tree4.Insert(i);
    }
    
- //  R/EQUIRE(tree.getCount() == 50);
+   REQUIRE(tree.getCount() == 50);
    for (size_t i = 0; i < 50; ++i)
    {
 	   tree4.Remove(i);
@@ -97,7 +81,7 @@ TEST_CASE("AATree", "[5]")
 	   tree5.insert(i);
    }
    
-  // REQUIRE(tree.getcount() == 50);
+  REQUIRE(tree.getcount() == 50);
    for (size_t i = 0; i < 50; ++i)
    {
 	   tree5.remove(i);
@@ -114,7 +98,7 @@ TEST_CASE("BST", "[6]")
 	   tree6.insert(i);
    }
    
-  // REQUIRE(tree.get_count() == 50);
+  REQUIRE(tree.get_count() == 50);
    for (size_t i = 0; i < 50; ++i)
    {
 	   tree6.remove(i);
