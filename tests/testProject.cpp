@@ -7,7 +7,7 @@
 #include "AATree.hpp"
 #include "BST.hpp"
 
-TEST_CASE("AVL", "[AVL]") 
+TEST_CASE("AVL", "[1]") 
 {
    AVL_tree<int> tree;
    for (size_t i = 0; i < 50; ++i)
@@ -24,7 +24,7 @@ TEST_CASE("AVL", "[AVL]")
 }
 
     
-TEST_CASE("RBT", "[RBT]") 
+TEST_CASE("RBT", "[2]") 
 {
    Tree<int> tree;
    for (size_t i = 0; i < 50; ++i)
@@ -41,7 +41,7 @@ TEST_CASE("RBT", "[RBT]")
 }
 
      
-TEST_CASE("Splay", "[Splay]") 
+TEST_CASE("Splay", "[3]") 
 {
     SplayTree<int> tree;
     for (size_t i = 0; i < 50; ++i)
@@ -58,7 +58,7 @@ TEST_CASE("Splay", "[Splay]")
 }
 
 
-TEST_CASE("Treap", "[Treap]") 
+TEST_CASE("Treap", "[4]") 
 {
    Treap<int> tree;
    for (size_t i = 0; i < 50; ++i)
@@ -75,7 +75,7 @@ TEST_CASE("Treap", "[Treap]")
 }
 
                        
-TEST_CASE("AATree", "[AATree]") 
+TEST_CASE("AATree", "[5]") 
 {
    AATree<int> tree;
    for (size_t i = 0; i < 50; ++i)
@@ -92,7 +92,7 @@ TEST_CASE("AATree", "[AATree]")
 }
 
 
-TEST_CASE("BST", "[BST]") 
+TEST_CASE("BST", "[6]") 
 {
    BST<int> tree;
    for (size_t i = 0; i < 50; ++i)
