@@ -77,7 +77,7 @@ TEST_CASE("Treap", "[Treap]")
                        
 TEST_CASE("AATree", "[AATree]") 
 {
-   AAtree<int> tree;
+   AATree<int> tree;
    for (size_t i = 0; i < 50; ++i)
    {
 	   tree.insert(i);
