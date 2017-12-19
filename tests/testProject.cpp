@@ -7,103 +7,103 @@
 #include "AATree.hpp"
 #include "BST.hpp"
 
-TEST_CASE("AVL", "[1]") 
-{
-   AVL_tree<int> tree;
-   for (size_t i = 0; i < 50; ++i)
-   {
-	   tree.insert(i);
-   }
-   
-   //REQUIRE(tree.count() == 50);
-   for (size_t i = 0; i < 50; ++i)
-   {
-	   tree.deleteElement(i);
-   }
-   REQUIRE(tree.count() == 0);
-}
+
 
     
 TEST_CASE("RBT", "[2]") 
 {
-   Tree<int> tree;
+   Tree<int> tree1;
    for (size_t i = 0; i < 50; ++i)
    {
-	   tree.insert(i);
+	   tree1.insert(i);
    }
    
    //REQUIRE(tree.count() == 50);
    for (size_t i = 0; i < 50; ++i)
    {
-	   tree.deleteElement(i);
+	   tree1.deleteElement(i);
    }
-   REQUIRE(tree.count() == 0);
+   REQUIRE(tree1.count() == 0);
 }
 
-     
+TEST_CASE("AVL", "[1]") 
+{
+   AVL_tree<int> tree2;
+   for (size_t i = 0; i < 50; ++i)
+   {
+	   tree2.insert(i);
+   }
+   
+   //REQUIRE(tree.count() == 50);
+   for (size_t i = 0; i < 50; ++i)
+   {
+	   tree2.deleteElement(i);
+   }
+   REQUIRE(tree2.count() == 0);
+}     
 TEST_CASE("Splay", "[3]") 
 {
-    SplayTree<int> tree;
+    SplayTree<int> tree3;
     for (size_t i = 0; i < 50; ++i)
    {
-	   tree.insert(i);
+	   tree3.insert(i);
    }
    
    //REQUIRE(tree.getCounter() == 50);
    for (size_t i = 0; i < 50; ++i)
    {
-	   tree.remove(i);
+	   tree3.remove(i);
    }
-   REQUIRE(tree.getCounter() == 0);
+   REQUIRE(tree3.getCounter() == 0);
 }
 
 
 TEST_CASE("Treap", "[4]") 
 {
-   Treap<int> tree;
+   Treap<int> tree4;
    for (size_t i = 0; i < 50; ++i)
    {
-	   tree.Insert(i);
+	   tree4.Insert(i);
    }
    
  //  R/EQUIRE(tree.getCount() == 50);
    for (size_t i = 0; i < 50; ++i)
    {
-	   tree.Remove(i);
+	   tree4.Remove(i);
    }
-   REQUIRE(tree.getCount() == 0);
+   REQUIRE(tree4.getCount() == 0);
 }
 
                        
 TEST_CASE("AATree", "[5]") 
 {
-   AATree<int> tree;
+   AATree<int> tree5;
    for (size_t i = 0; i < 50; ++i)
    {
-	   tree.insert(i);
+	   tree5.insert(i);
    }
    
   // REQUIRE(tree.getcount() == 50);
    for (size_t i = 0; i < 50; ++i)
    {
-	   tree.remove(i);
+	   tree5.remove(i);
    }
-   REQUIRE(tree.getcount() == 0);
+   REQUIRE(tree5.getcount() == 0);
 }
 
 
 TEST_CASE("BST", "[6]") 
 {
-   BST<int> tree;
+   BST<int> tree6;
    for (size_t i = 0; i < 50; ++i)
    {
-	   tree.insert(i);
+	   tree6.insert(i);
    }
    
   // REQUIRE(tree.get_count() == 50);
    for (size_t i = 0; i < 50; ++i)
    {
-	   tree.remove(i);
+	   tree6.remove(i);
    }
-   REQUIRE(tree.get_count() == 0);
+   REQUIRE(tree6.get_count() == 0);
 }
