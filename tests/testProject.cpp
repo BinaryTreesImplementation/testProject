@@ -16,7 +16,7 @@ TEST_CASE("RBT", "[2]")
 	   tree1.insert(i);
    }
    
-   REQUIRE(tree.count() == 50);
+   REQUIRE(tree1.count() == 50);
    for (size_t i = 0; i < 50; ++i)
    {
 	   tree1.deleteElement(i);
