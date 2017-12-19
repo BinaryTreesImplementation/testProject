@@ -9,7 +9,7 @@
 
 
 
-    
+    /*
 TEST_CASE("RBT", "[2]") 
 {
    Tree<int> tree1;
@@ -40,7 +40,7 @@ TEST_CASE("AVL", "[1]")
 	   tree2.deleteElement(i);
    }
    REQUIRE(tree2.count() == 0);
-}     
+}    */ 
 TEST_CASE("Splay", "[3]") 
 {
     SplayTree<int> tree3;
