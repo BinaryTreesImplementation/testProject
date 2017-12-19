@@ -43,6 +43,7 @@ TEST_CASE("RBT", "[RBT]")
      
 TEST_CASE("Splay", "[Splay]") 
 {
+    SplayTree<int> tree;
     for (size_t i = 0; i < 50; ++i)
    {
 	   tree.insert(i);
@@ -76,7 +77,7 @@ TEST_CASE("Treap", "[Treap]")
                        
 TEST_CASE("AATree", "[AATree]") 
 {
-   AVL_tree<int> tree;
+   AAtree<int> tree;
    for (size_t i = 0; i < 50; ++i)
    {
 	   tree.insert(i);
